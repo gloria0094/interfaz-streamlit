@@ -88,7 +88,7 @@ with col1:
     st.info("Nota: Este valor representa la probabilidad de que el objeto sea un Exoplaneta.")
     # Botón para limpiar pantalla
     st.markdown("<br>", unsafe_allow_html=True) # Espacio en blanco
-    if st.button("🧹 Limpiar Campos y Volver a Clasificar", use_container_width=True):
+    if st.button("Volver a Clasificar 💫", use_container_width=True):
         limpiar_interfaz()
         st.rerun()
 
