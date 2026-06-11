@@ -13,11 +13,14 @@ if 'veredicto_ia' not in st.session_state:
 
 #Limpiar interfaz
 def limpiar_interfaz():
+    # 1. Resetear el medidor visual y el estado
     st.session_state.probabilidad_exoplaneta = 0.0
     st.session_state.veredicto_ia = "PENDIENTE DE ANÁLISIS"
-    # Esto le dice a Streamlit que borre los datos guardados en el formulario de abajo
-    if "entity_inputs" in st.session_state:
-        st.session_state.entity_inputs = {}
+    
+    # 2. Buscar TODAS las llaves de los inputs técnicos y eliminarlas
+    llaves_a_limpiar = [key for key in st.session_state.keys() if key.startswith("input_")]
+    for key in llaves_a_limpiar:
+        del st.session_state[key]
 
 # Estilo para mantener la estética de tu diseño oscuro original
 st.markdown("""
