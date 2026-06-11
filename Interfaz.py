@@ -378,8 +378,8 @@ with col2:
             "koi_kepmag": float(koi_kepmag) if koi_kepmag is not None else 0.0,
         }
 
-        url_spring = "http://localhost:8080/api/v1/exoplanets/classify"
-
+        url_spring = "http://esoplanet01-production.up.railway.app/api/v1/exoplanets/classify"
+        
         with st.spinner("Enviando datos..."):
             try:
                 response = requests.post(url_spring, json=payload)
