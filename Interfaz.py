@@ -378,7 +378,7 @@ with col2:
             "koi_kepmag": float(koi_kepmag) if koi_kepmag is not None else 0.0,
         }
 
-        url_spring = "http://esoplanet01-production.up.railway.app/api/v1/exoplanets/classify"
+        url_spring = "https://esoplanet01-production.up.railway.app/api/v1/exoplanets/classify"
         
         with st.spinner("Enviando datos..."):
             try:
