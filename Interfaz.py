@@ -340,7 +340,7 @@ with col2:
         campos_esenciales = [koi_period, koi_model_snr, koi_time0bk, koi_duration]
     
         if all(v is None for v in campos_esenciales):
-            st.error("❌ No puedes clasificar un exoplaneta sin introducir datos técnicos. Por favor, completa los campos obligatorios.")
+            st.error("❌ No puedes clasificar un exoplaneta sin introducir datos. Por favor, completa los campos.")
         else:
             # 2. Si hay datos, armar el payload con normalidad
             payload = {
