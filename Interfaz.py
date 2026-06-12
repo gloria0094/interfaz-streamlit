@@ -336,60 +336,67 @@ with col2:
 
     # para evitar que Streamlit limpie el session_state al recargar la página.
     if submit_btn:
-        payload = {
-            "koi_fpflag_nt": int(koi_fpflag_nt),
-            "koi_fpflag_ss": int(koi_fpflag_ss),
-            "koi_fpflag_co": int(koi_fpflag_co),
-            "koi_fpflag_ec": int(koi_fpflag_ec),
-            "koi_period": float(koi_period) if koi_period is not None else 0.0,
-            "koi_time0bk": float(koi_time0bk) if koi_time0bk is not None else 0.0,
-            "koi_time0bk_err1": float(koi_time0bk_err1) if koi_time0bk_err1 is not None else 0.0,
-            "koi_impact": float(koi_impact) if koi_impact is not None else 0.0,
-            "koi_impact_err1": float(koi_impact_err1) if koi_impact_err1 is not None else 0.0,
-            "koi_impact_err2": float(koi_impact_err2) if koi_impact_err2 is not None else 0.0,
-            "koi_duration": float(koi_duration) if koi_duration is not None else 0.0,
-            "koi_duration_err1": float(koi_duration_err1) if koi_duration_err1 is not None else 0.0,
-            "koi_duration_err2": float(koi_duration_err2) if koi_duration_err2 is not None else 0.0,
-            "koi_depth": float(koi_depth) if koi_depth is not None else 0.0,
-            "koi_depth_err1": float(koi_depth_err1) if koi_depth_err1 is not None else 0.0,
-            "koi_depth_err2": float(koi_depth_err2) if koi_depth_err2 is not None else 0.0,
-            "koi_prad": float(koi_prad) if koi_prad is not None else 0.0,
-            "koi_prad_err2": float(koi_prad_err2) if koi_prad_err2 is not None else 0.0,
-            "koi_teq": float(koi_teq) if koi_teq is not None else 0.0,
-            "koi_insol": float(koi_insol) if koi_insol is not None else 0.0,
-            "koi_insol_err2": float(koi_insol_err2) if koi_insol_err2 is not None else 0.0,
-            "koi_model_snr": float(koi_model_snr) if koi_model_snr is not None else 0.0,
-            "koi_tce_plnt_num": int(koi_tce_plnt_num) if koi_tce_plnt_num is not None else 0.0,
-            "koi_steff": float(koi_steff) if koi_steff is not None else 0.0,
-            "koi_steff_err1": float(koi_steff_err1) if koi_steff_err1 is not None else 0.0,
-            "koi_slogg": float(koi_slogg) if koi_slogg is not None else 0.0,
-            "koi_slogg_err2": float(koi_slogg_err2) if koi_slogg_err2 is not None else 0.0,
-            "koi_srad_err1": float(koi_srad_err1) if koi_srad_err1 is not None else 0.0,
-            "ra": float(ra) if ra is not None else 0.0,
-            "dec": float(dec_val) if dec_val is not None else 0.0,
-            "koi_kepmag": float(koi_kepmag) if koi_kepmag is not None else 0.0,
-        }
+        # 1. VALIDACIÓN PREVIA: Verificar si los campos numéricos más importantes siguen vacíos
+        campos_esenciales = [koi_period, koi_model_snr, koi_time0bk, koi_duration]
+    
+        if all(v is None for v in campos_esenciales):
+            st.error("❌ No puedes clasificar un exoplaneta sin introducir datos técnicos. Por favor, completa los campos obligatorios.")
+        else:
+            # 2. Si hay datos, armar el payload con normalidad
+            payload = {
+                "koi_fpflag_nt": int(koi_fpflag_nt),
+                "koi_fpflag_ss": int(koi_fpflag_ss),
+                "koi_fpflag_co": int(koi_fpflag_co),
+                "koi_fpflag_ec": int(koi_fpflag_ec),
+                "koi_period": float(koi_period) if koi_period is not None else 0.0,
+                "koi_time0bk": float(koi_time0bk) if koi_time0bk is not None else 0.0,
+                "koi_time0bk_err1": float(koi_time0bk_err1) if koi_time0bk_err1 is not None else 0.0,
+                "koi_impact": float(koi_impact) if koi_impact is not None else 0.0,
+                "koi_impact_err1": float(koi_impact_err1) if koi_impact_err1 is not None else 0.0,
+                "koi_impact_err2": float(koi_impact_err2) if koi_impact_err2 is not None else 0.0,
+                "koi_duration": float(koi_duration) if koi_duration is not None else 0.0,
+                "koi_duration_err1": float(koi_duration_err1) if koi_duration_err1 is not None else 0.0,
+                "koi_duration_err2": float(koi_duration_err2) if koi_duration_err2 is not None else 0.0,
+                "koi_depth": float(koi_depth) if koi_depth is not None else 0.0,
+                "koi_depth_err1": float(koi_depth_err1) if koi_depth_err1 is not None else 0.0,
+                "koi_depth_err2": float(koi_depth_err2) if koi_depth_err2 is not None else 0.0,
+                "koi_prad": float(koi_prad) if koi_prad is not None else 0.0,
+                "koi_prad_err2": float(koi_prad_err2) if koi_prad_err2 is not None else 0.0,
+                "koi_teq": float(koi_teq) if koi_teq is not None else 0.0,
+                "koi_insol": float(koi_insol) if koi_insol is not None else 0.0,
+                "koi_insol_err2": float(koi_insol_err2) if koi_insol_err2 is not None else 0.0,
+                "koi_model_snr": float(koi_model_snr) if koi_model_snr is not None else 0.0,
+                "koi_tce_plnt_num": int(koi_tce_plnt_num) if koi_tce_plnt_num is not None else 0.0,
+                "koi_steff": float(koi_steff) if koi_steff is not None else 0.0,
+                "koi_steff_err1": float(koi_steff_err1) if koi_steff_err1 is not None else 0.0,
+                "koi_slogg": float(koi_slogg) if koi_slogg is not None else 0.0,
+                "koi_slogg_err2": float(koi_slogg_err2) if koi_slogg_err2 is not None else 0.0,
+                "koi_srad_err1": float(koi_srad_err1) if koi_srad_err1 is not None else 0.0,
+                "ra": float(ra) if ra is not None else 0.0,
+                "dec": float(dec_val) if dec_val is not None else 0.0,
+                "koi_kepmag": float(koi_kepmag) if koi_kepmag is not None else 0.0,
+            }
 
-        url_spring = "https://esoplanet01-production.up.railway.app/api/v1/exoplanets/classify"
-        
-        with st.spinner("Enviando datos..."):
-            try:
-                response = requests.post(url_spring, json=payload)
-
-                if response.status_code == 200:
-                    resultado = response.json()
-
-                    # Guardamos los resultados de forma persistente
-                    st.session_state.probabilidad_exoplaneta = float(resultado.get("probability", 0.0))
-
-                    clase = resultado.get("prediction")
-                    # Sincronizado: 0 es Candidato/Rechazado y 1 es Confirmado en tu IA Binaria
-                    etiquetas = {0: "CANDIDATO", 1: "CONFIRMADO", 2: "FALSO POSITIVO"}
-                    st.session_state.veredicto_ia = etiquetas.get(int(clase), "DESCONOCIDO")
-
-                    st.toast("¡Predicción procesada con éxito!", icon="🚀")
-                    st.rerun()
-                else:
-                    st.error(f"Error en el mapeo de Spring Boot ({response.status_code}): {response.text}")
-            except Exception as e:
-                st.error(f"No se pudo establecer contacto con la API en Java: {e}")
+            url_spring = "https://esoplanet01-production.up.railway.app/api/v1/exoplanets/classify"
+            
+            with st.spinner("Enviando datos..."):
+                try:
+                    response = requests.post(url_spring, json=payload)
+    
+                    if response.status_code == 200:
+                        resultado = response.json()
+    
+                        # Guardamos los resultados de forma persistente
+                        st.session_state.probabilidad_exoplaneta = float(resultado.get("probability", 0.0))
+    
+                        clase = resultado.get("prediction")
+                        # Sincronizado: 0 es Candidato/Rechazado y 1 es Confirmado en tu IA Binaria
+                        etiquetas = {0: "CANDIDATO", 1: "CONFIRMADO", 2: "FALSO POSITIVO"}
+                        st.session_state.veredicto_ia = etiquetas.get(int(clase), "DESCONOCIDO")
+    
+                        st.toast("¡Predicción procesada con éxito!", icon="🚀")
+                        st.rerun()
+                    else:
+                        st.error(f"Error en el mapeo de Spring Boot ({response.status_code}): {response.text}")
+                except Exception as e:
+                    st.error(f"No se pudo establecer contacto con la API en Java: {e}")
