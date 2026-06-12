@@ -157,13 +157,6 @@ with col2:
                     label_time01 = "koi_time0bk_err1"
                 koi_time0bk_err1 = e1.number_input(label_time01,value=None, format="%.7f", placeholder="Ej: 0.000981", key="input_time01")
 
-                if st.session_state.get("input_time02") is None and "input_time02" in st.session_state:
-                    label_time02= "koi_time0bk_err2 :red[*]"
-                    campos_vacios.append("koi_time0bk_err2")
-                else:
-                    label_time02 = "koi_time0bk_err2"
-                koi_time0bk_err2 = e2.number_input(label_time02, value=None, format="%.3f", placeholder="0.0", key="input_time02")
-
                 e3, e4 = st.columns(2)
                 if st.session_state.get("input_duration01") is None and "input_duration01" in st.session_state:
                     label_duration01 = "koi_duration_err1 :red[*]"
@@ -351,7 +344,6 @@ with col2:
             "koi_period": float(koi_period) if koi_period is not None else 0.0,
             "koi_time0bk": float(koi_time0bk) if koi_time0bk is not None else 0.0,
             "koi_time0bk_err1": float(koi_time0bk_err1) if koi_time0bk_err1 is not None else 0.0,
-            "koi_time0bk_err2": float(koi_time0bk_err2) if koi_time0bk_err2 is not None else 0.0,
             "koi_impact": float(koi_impact) if koi_impact is not None else 0.0,
             "koi_impact_err1": float(koi_impact_err1) if koi_impact_err1 is not None else 0.0,
             "koi_impact_err2": float(koi_impact_err2) if koi_impact_err2 is not None else 0.0,
